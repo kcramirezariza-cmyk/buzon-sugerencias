@@ -11,12 +11,12 @@
 // ============================================================
 
 const firebaseConfig = {
-  apiKey: "PEGA_AQUI_TU_API_KEY",
-  authDomain: "PEGA_AQUI.firebaseapp.com",
-  projectId: "PEGA_AQUI",
-  storageBucket: "PEGA_AQUI.firebasestorage.app",
-  messagingSenderId: "PEGA_AQUI",
-  appId: "PEGA_AQUI"
+  apiKey: "AIzaSyAKjxwOts0qOLOFfQhzdfkQk5r4GWwsxSo",
+  authDomain: "buzon-sugerencias-15337.firebaseapp.com",
+  projectId: "buzon-sugerencias-15337",
+  storageBucket: "buzon-sugerencias-15337.firebasestorage.app",
+  messagingSenderId: "146935632686",
+  appId: "1:146935632686:web:37e997efc754aba72da0bf"
 };
 
 // No modifiques nada debajo de esta línea.
