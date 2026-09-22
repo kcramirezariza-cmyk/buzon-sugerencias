@@ -44,19 +44,28 @@ function showLogin() {
   document.getElementById("loginScreen").classList.remove("hidden");
 }
 
+// Firebase Authentication solo acepta correos, pero acá los jefes entran
+// con un usuario simple (ej: "admin"). Este sufijo se agrega por dentro,
+// sin que el jefe tenga que escribir ni ver un correo.
+const USUARIO_DOMINIO = "@buzon-sugerencias.com";
+
 async function handleLogin(e) {
   e.preventDefault();
-  const email = document.getElementById("loginEmail").value.trim();
+  const usuario = document.getElementById("loginEmail").value.trim();
   const pass = document.getElementById("loginPassword").value;
   const errEl = document.getElementById("loginError");
   errEl.textContent = "";
   const btn = document.getElementById("loginBtn");
   btn.disabled = true;
 
+  // Si el jefe escribe un usuario simple (sin @), se completa como correo
+  // interno de Firebase. Si alguien ya escribe un correo completo, se usa tal cual.
+  const email = usuario.includes("@") ? usuario : usuario + USUARIO_DOMINIO;
+
   try {
     await auth.signInWithEmailAndPassword(email, pass);
   } catch (err) {
-    errEl.textContent = "Correo o contraseña incorrectos.";
+    errEl.textContent = "Usuario o contraseña incorrectos.";
   } finally {
     btn.disabled = false;
   }
