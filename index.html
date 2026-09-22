@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
+<title>Buzón de Sugerencias</title>
+<meta name="description" content="Envía tu sugerencia, queja o comentario de forma totalmente anónima." />
+
+<meta name="theme-color" content="#4c1d95" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Buzón" />
+
+<link rel="stylesheet" href="styles.css" />
+<link rel="preconnect" href="https://www.gstatic.com" />
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <!-- ===================== FORMULARIO ===================== -->
+    <div id="formScreen">
+      <header class="head">
+        <div class="head-icon">📮</div>
+        <h1>Buzón de Sugerencias</h1>
+        <p class="subtitle">Tu mensaje es <strong>100% anónimo</strong>. No pedimos tu nombre,
+          ni tu correo, ni nada que te identifique.</p>
+      </header>
+
+      <form id="buzonForm" novalidate>
+
+        <div class="field">
+          <label>¿Qué quieres enviar?</label>
+          <div class="tipo-selector" id="tipoSelector">
+            <button type="button" class="tipo-btn active" data-tipo="sugerencia">
+              <span class="tipo-emoji">💡</span><span>Sugerencia</span>
+            </button>
+            <button type="button" class="tipo-btn" data-tipo="queja">
+              <span class="tipo-emoji">⚠️</span><span>Queja</span>
+            </button>
+            <button type="button" class="tipo-btn" data-tipo="otro">
+              <span class="tipo-emoji">💬</span><span>Otro</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="mensaje">Escribe tu mensaje</label>
+          <textarea id="mensaje" rows="6" maxlength="3000"
+            placeholder="Cuéntanos con calma, nadie sabrá que fuiste tú..." required></textarea>
+          <span class="counter"><span id="charCount">0</span>/3000</span>
+        </div>
+
+        <div class="field">
+          <label>Agregar fotos (opcional)</label>
+          <input type="file" id="fotoInput" accept="image/*" multiple hidden />
+          <label for="fotoInput" class="upload-btn" id="uploadBtnLabel">
+            📷 Elegir de la galería
+          </label>
+          <p class="hint">Hasta 3 imágenes.</p>
+          <div id="previewGrid" class="preview-grid"></div>
+        </div>
+
+        <!-- honeypot anti-spam, invisible para personas -->
+        <div class="honeypot" aria-hidden="true">
+          <label for="website">No llenar este campo</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p id="formMsg" class="form-msg"></p>
+
+        <button type="submit" id="submitBtn" class="submit-btn">
+          <span id="submitBtnText">Enviar de forma anónima</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- ===================== PANTALLA DE ÉXITO ===================== -->
+    <div id="successScreen" class="success-screen hidden">
+      <div class="success-icon">✅</div>
+      <h2>¡Gracias por tu mensaje!</h2>
+      <p>Se envió de forma totalmente anónima. Nadie podrá saber quién lo escribió.</p>
+      <button type="button" id="sendAnotherBtn" class="submit-btn secondary">Enviar otro mensaje</button>
+    </div>
+
+  </div>
+
+  <p class="footer-note">🔒 Este buzón no guarda tu nombre, correo, ni ubicación.</p>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

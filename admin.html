@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Panel · Buzón de Sugerencias</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="preconnect" href="https://www.gstatic.com" />
+</head>
+<body class="admin-body">
+
+<!-- ===================== LOGIN ===================== -->
+<div id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-card" autocomplete="on">
+    <div style="font-size:36px;">🔐</div>
+    <h1>Panel de administración</h1>
+    <p class="login-sub">Buzón de Sugerencias · Acceso privado</p>
+    <input type="email" id="loginEmail" placeholder="Correo" required autocomplete="username" autocapitalize="none" spellcheck="false" />
+    <input type="password" id="loginPassword" placeholder="Contraseña" required autocomplete="current-password" />
+    <button type="submit" id="loginBtn" class="submit-btn">Ingresar</button>
+    <p id="loginError" class="login-error"></p>
+    <p class="login-hint">Solo administradores autorizados pueden ver los mensajes.</p>
+  </form>
+</div>
+
+<!-- ===================== PANEL ===================== -->
+<div id="app" class="admin-wrap hidden">
+  <div class="admin-topbar">
+    <h1>📮 Mensajes recibidos</h1>
+    <button id="logoutBtn" class="logout-btn">Salir</button>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total</div></div>
+    <div class="stat-box"><div class="stat-num" id="statUnread">0</div><div class="stat-label">Sin leer</div></div>
+    <div class="stat-box"><div class="stat-num" id="statQuejas">0</div><div class="stat-label">Quejas</div></div>
+  </div>
+
+  <div class="filter-row" id="filterRow">
+    <button class="filter-chip active" data-filter="todos">Todos</button>
+    <button class="filter-chip" data-filter="no_leidos">Sin leer</button>
+    <button class="filter-chip" data-filter="sugerencia">💡 Sugerencias</button>
+    <button class="filter-chip" data-filter="queja">⚠️ Quejas</button>
+    <button class="filter-chip" data-filter="otro">💬 Otros</button>
+  </div>
+
+  <div id="msgList" class="msg-list"></div>
+
+  <div id="emptyState" class="empty-state hidden">
+    <div class="e-icon">📭</div>
+    <p>No hay mensajes en esta categoría.</p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Colección "buzon": mensajes anónimos de sugerencias/quejas.
+    match /buzon/{doc} {
+
+      // CUALQUIERA puede CREAR un mensaje (sin login, totalmente anónimo).
+      // No se guarda ningún dato del remitente (ni IP, ni usuario, ni auth).
+      // Se valida la forma del documento para evitar abuso/spam básico.
+      allow create: if
+        request.resource.data.keys().hasOnly(['tipo', 'mensaje', 'imagenes', 'leido', 'fecha']) &&
+        request.resource.data.tipo in ['sugerencia', 'queja', 'otro'] &&
+        request.resource.data.mensaje is string &&
+        request.resource.data.mensaje.size() > 0 &&
+        request.resource.data.mensaje.size() <= 3000 &&
+        request.resource.data.imagenes is list &&
+        request.resource.data.imagenes.size() <= 3 &&
+        request.resource.data.leido == false;
+
+      // Solo alguien con sesión iniciada (el panel de administración) puede
+      // LEER, marcar como leído o BORRAR mensajes.
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}
